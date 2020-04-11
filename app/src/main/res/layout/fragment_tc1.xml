@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.zyc.zcontrol.controlItem.tc1.TC1Fragment">
+    tools:context=".deviceItem.tc1.TC1Fragment">
 
-    <android.support.v4.widget.SwipeRefreshLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -82,6 +82,7 @@
                 <Switch
                     android:id="@+id/tbtn_main_button2"
                     style="@style/TC1SwitchStyle"
+                    app:layout_constraintBottom_toBottomOf="@+id/tbtn_main_button1"
                     app:layout_constraintEnd_toStartOf="@+id/tbtn_main_button3"
                     app:layout_constraintStart_toEndOf="@+id/tbtn_main_button1"
                     app:layout_constraintTop_toTopOf="@+id/tbtn_main_button1"
@@ -90,6 +91,7 @@
                 <Switch
                     android:id="@+id/tbtn_main_button3"
                     style="@style/TC1SwitchStyle"
+                    app:layout_constraintBottom_toBottomOf="@+id/tbtn_main_button1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tbtn_main_button2"
                     app:layout_constraintTop_toTopOf="@+id/tbtn_main_button1"
@@ -108,6 +110,7 @@
                 <Switch
                     android:id="@+id/tbtn_main_button5"
                     style="@style/TC1SwitchStyle"
+                    app:layout_constraintBottom_toBottomOf="@+id/tbtn_main_button4"
                     app:layout_constraintEnd_toStartOf="@+id/tbtn_main_button6"
                     app:layout_constraintStart_toEndOf="@+id/tbtn_main_button4"
                     app:layout_constraintTop_toTopOf="@+id/tbtn_main_button4"
@@ -116,6 +119,7 @@
                 <Switch
                     android:id="@+id/tbtn_main_button6"
                     style="@style/TC1SwitchStyle"
+                    app:layout_constraintBottom_toBottomOf="@+id/tbtn_main_button4"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tbtn_main_button5"
                     app:layout_constraintTop_toTopOf="@+id/tbtn_main_button4"
@@ -135,16 +139,15 @@
                 <TextView
                     android:id="@+id/tv_main_button1"
                     style="@style/TC1SwitchTextViewStyle"
+                    android:layout_marginTop="6dp"
                     android:text="插口1"
                     app:layout_constraintEnd_toEndOf="@+id/tbtn_main_button1"
                     app:layout_constraintStart_toStartOf="@+id/tbtn_main_button1"
-                    app:layout_constraintTop_toBottomOf="@+id/tbtn_main_button1"
-                    />
+                    app:layout_constraintTop_toBottomOf="@+id/tbtn_main_button1" />
 
                 <TextView
                     android:id="@+id/tv_main_button2"
                     style="@style/TC1SwitchTextViewStyle"
-                    android:layout_marginBottom="8dp"
                     android:text="插口2"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_main_button1"
                     app:layout_constraintEnd_toEndOf="@+id/tbtn_main_button2"
@@ -155,35 +158,37 @@
                     android:id="@+id/tv_main_button3"
                     style="@style/TC1SwitchTextViewStyle"
                     android:text="插口3"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_main_button2"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_main_button1"
                     app:layout_constraintEnd_toEndOf="@+id/tbtn_main_button3"
                     app:layout_constraintStart_toStartOf="@+id/tbtn_main_button3"
-                    app:layout_constraintTop_toTopOf="@+id/tv_main_button2" />
+                    app:layout_constraintTop_toTopOf="@+id/tv_main_button1" />
 
                 <TextView
                     android:id="@+id/tv_main_button4"
                     style="@style/TC1SwitchTextViewStyle"
+                    android:layout_marginTop="6dp"
                     android:text="插口4"
                     app:layout_constraintEnd_toEndOf="@+id/tbtn_main_button4"
                     app:layout_constraintStart_toStartOf="@+id/tbtn_main_button4"
-                    app:layout_constraintTop_toBottomOf="@+id/tbtn_main_button4"/>
+                    app:layout_constraintTop_toBottomOf="@+id/tbtn_main_button4" />
 
                 <TextView
                     android:id="@+id/tv_main_button5"
                     style="@style/TC1SwitchTextViewStyle"
-                    android:layout_marginBottom="8dp"
                     android:text="插口5"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_main_button4"
                     app:layout_constraintEnd_toEndOf="@+id/tbtn_main_button5"
                     app:layout_constraintStart_toStartOf="@+id/tbtn_main_button5"
-                    app:layout_constraintTop_toBottomOf="@+id/tbtn_main_button5"/>
+                    app:layout_constraintTop_toTopOf="@+id/tv_main_button4" />
 
                 <TextView
                     android:id="@+id/tv_main_button6"
                     style="@style/TC1SwitchTextViewStyle"
                     android:text="插口6"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_main_button4"
                     app:layout_constraintEnd_toEndOf="@+id/tbtn_main_button6"
                     app:layout_constraintStart_toStartOf="@+id/tbtn_main_button6"
-                    app:layout_constraintTop_toBottomOf="@+id/tbtn_main_button6"  />
+                    app:layout_constraintTop_toTopOf="@+id/tv_main_button4" />
 
 
                 <TextView
@@ -196,31 +201,16 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_main_button4" />
 
 
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <ScrollView
-        android:id="@+id/scrollView"
+
+    <include
+        layout="@layout/view_log_textview"
         android:layout_width="match_parent"
-        android:layout_height="22sp"
-        android:layout_gravity="bottom"
-        android:addStatesFromChildren="false"
-        android:scrollbars="none">
+        android:layout_height="66sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_log"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Log"
-                android:textSize="18sp" />
-        </LinearLayout>
-    </ScrollView>
 
 </LinearLayout>

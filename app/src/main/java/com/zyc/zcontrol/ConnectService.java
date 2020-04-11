@@ -4,8 +4,9 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
@@ -29,6 +30,8 @@ public class ConnectService extends Service {
 
     //region 广播静态变量
 
+
+    public final static String ACTION_MAINACTIVITY_DEVICELISTUPDATE = "com.zyc.zcontrol.mainactivity.DEVICELISTUPDATE";
     //region MQTT相关
     public final static String ACTION_MQTT_CONNECTED = "com.zyc.zcontrol.mqtt.ACTION_MQTT_CONNECTED";
     public final static String ACTION_MQTT_DISCONNECTED = "com.zyc.zcontrol.mqtt.ACTION_MQTT_DISCONNECTED";
@@ -181,7 +184,7 @@ public class ConnectService extends Service {
     }
     //endregion
 
-    //region MQTT连接状态字函数
+    //region MQTT连接/状态函数/订阅topic/取消订阅topic
     public void connect(String mqtt_uri, String mqtt_id, String mqtt_user, String mqtt_password) {
         if (mqtt_uri == null || mqtt_uri.length() < 3) return;
         if (mqtt_user == null) mqtt_user = "";
@@ -241,16 +244,17 @@ public class ConnectService extends Service {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
                     Log.d("ConnectService", "connect onSuccess");
-                    try {
-                        mqttClient.subscribe("domoticz/in", 0);
-                        mqttClient.subscribe("device/+/+/state", 0);
-                        //mqttClient.subscribe("homeassistant/+/+/#", 0);
-                        broadcastUpdate(ACTION_MQTT_CONNECTED); //连接成功
-                    } catch (MqttException e) {
-                        e.printStackTrace();
-                        Log.d("ConnectService", "connect fail");
-                        broadcastUpdate(ACTION_MQTT_DISCONNECTED); //连接失败
-                    }
+//                    try {
+//                        mqttClient.subscribe("domoticz/out", 0);
+//                        mqttClient.subscribe("device/+/+/state", 0);
+//                        mqttClient.subscribe("device/+/+/sensor", 0);
+                    //mqttClient.subscribe("homeassistant/+/+/#", 0);
+                    broadcastUpdate(ACTION_MQTT_CONNECTED); //连接成功
+//                    } catch (MqttException e) {
+//                        e.printStackTrace();
+//                        Log.d("ConnectService", "connect fail");
+//                        broadcastUpdate(ACTION_MQTT_DISCONNECTED); //连接失败
+//                    }
                 }
 
                 @Override
@@ -290,6 +294,43 @@ public class ConnectService extends Service {
             e.printStackTrace();
         }
     }
+
+    public void subscribe(String topic, int qos) {
+        try {
+            mqttClient.subscribe(topic, qos);
+        } catch (MqttException e) {
+            e.printStackTrace();
+            disconnect();
+        }
+    }
+
+    public void subscribe(String[] topic, int[] qos) {
+        try {
+            mqttClient.subscribe(topic, qos);
+        } catch (MqttException e) {
+            e.printStackTrace();
+            disconnect();
+        }
+    }
+
+    public void unsubscribe(String topic) {
+        try {
+            mqttClient.unsubscribe(topic);
+        } catch (MqttException e) {
+            e.printStackTrace();
+            disconnect();
+        }
+    }
+
+    public void unsubscribe(String[] topic) {
+        try {
+            mqttClient.unsubscribe(topic);
+        } catch (MqttException e) {
+            e.printStackTrace();
+            disconnect();
+        }
+    }
+
     //endregion
 
     //region 发送
@@ -349,7 +390,7 @@ public class ConnectService extends Service {
 
     //region MQTT发送函数
     public void MQTTSend(String topic, String str) {
-        MQTTSend(topic, str, 0);
+        MQTTSend(topic, str, 1);
     }
 
     public void MQTTSend(String topic, String str, int qos) {
